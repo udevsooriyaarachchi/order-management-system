@@ -28,6 +28,8 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
+      // Note: Using window.location.href for 401 errors is intentional
+      // as this interceptor is not a React component and cannot use useNavigate
       window.location.href = '/login';
     }
     return Promise.reject(error);

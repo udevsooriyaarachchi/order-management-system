@@ -51,6 +51,8 @@ const mockUser = {
 };
 
 // Mock orders data (stored in memory)
+// Note: This is intentionally module-level for demo purposes.
+// In a production app, use localStorage, Redux, or a backend API for persistence.
 let mockOrders = [
   {
     id: 1,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { productsAPI, ordersAPI } from '../services/api';
 import Button from '../components/Button';
@@ -14,9 +14,17 @@ const CreateOrder = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     fetchProducts();
+    
+    // Cleanup timeout on unmount
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   const fetchProducts = async () => {
@@ -96,8 +104,8 @@ const CreateOrder = () => {
         selectedProducts: [],
       });
 
-      // Redirect to order history after 2 seconds
-      setTimeout(() => {
+      // Redirect to order history after 2 seconds with cleanup
+      timeoutRef.current = setTimeout(() => {
         navigate('/order-history');
       }, 2000);
     } catch {
