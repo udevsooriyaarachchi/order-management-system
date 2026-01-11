@@ -16,7 +16,7 @@ const Products = () => {
       setLoading(true);
       const response = await productsAPI.getAll();
       setProducts(response.data);
-    } catch (err) {
+    } catch {
       setError('Failed to fetch products. Please try again.');
     } finally {
       setLoading(false);

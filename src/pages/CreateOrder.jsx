@@ -23,7 +23,7 @@ const CreateOrder = () => {
     try {
       const response = await productsAPI.getAll();
       setProducts(response.data);
-    } catch (err) {
+    } catch {
       setError('Failed to fetch products.');
     }
   };
@@ -100,7 +100,7 @@ const CreateOrder = () => {
       setTimeout(() => {
         navigate('/order-history');
       }, 2000);
-    } catch (err) {
+    } catch {
       setError('Failed to create order. Please try again.');
     } finally {
       setLoading(false);

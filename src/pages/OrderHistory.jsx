@@ -21,7 +21,7 @@ const OrderHistory = () => {
       ]);
       setOrders(ordersResponse.data);
       setProducts(productsResponse.data);
-    } catch (err) {
+    } catch {
       setError('Failed to fetch orders. Please try again.');
     } finally {
       setLoading(false);
